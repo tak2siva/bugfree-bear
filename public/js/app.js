@@ -15,7 +15,7 @@ angular.module('movieApp').config(function($stateProvider,$httpProvider){
        controller:'MovieViewController'
     }).state('newMovie',{
         url:'/movies',
-        templateUrl:'partials/movie-add.html',
+     //   templateUrl:'partials/movie-add.html',
         controller:'MovieCreateController'
     }).state('editMovie',{
         url:'/movies/:id/edit',

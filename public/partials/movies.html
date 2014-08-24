@@ -1,5 +1,6 @@
-<a ui-sref="newMovie" class="btn-primary btn-lg nodecoration">Add New Movie</a>
-<table class="table movietable">
+<!-- <a ui-sref="newMovie" class="btn-primary btn-lg nodecoration">Add New Movie</a> -->
+<!--
+<table class="table movietable" hidden="true">
     <tr>
         <td><h3>All Movies</h3></td>
         <td></td>
@@ -15,7 +16,63 @@
 
 <br />
 <br />
+-->
 
-<div ng-repeat="movie in movies">
-	<a>{{movie.name}}</a>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" ng-submit="addMovie()">
+    		<div ng-include="'partials/_form.html'"></div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="saveMovie()" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+
+<div class="container">
+    <div class="well well-sm">
+        <div class="btn-group">
+        	<!-- <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus">New</span></button> -->
+        	<a href="#" ng-click="initMovie()" id="new_button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus">
+            </span>New</a> 
+        </div>
+        <div class="btn-group" style="margin-left: 82%;">
+            <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+            </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
+                class="glyphicon glyphicon-th"></span>Grid</a>
+        </div>
+    </div>
+    <div id="products" class="row list-group" >
+        <div class="item  col-xs-4 col-lg-4" ng-repeat="movie in movies">
+            <div class="thumbnail">
+                <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+                <div class="caption">
+                    <h4 class="group inner list-group-item-heading">
+                        {{movie.name}}</h4>
+                    <p class="group inner list-group-item-text">
+                        This is directed by {{movie.director}}</p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">
+                                {{movie.year}}</p>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <a class="btn btn-success" ui-sref="editMovie({id:movie.id})">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
 </div>
