@@ -18,13 +18,13 @@
 <br />
 -->
 
-<!-- Modal -->
+<!-- New Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">New</h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="form" ng-submit="addMovie()">
@@ -32,13 +32,37 @@
 		</form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" >Close</button>
         <button type="button" class="btn btn-primary" ng-click="saveMovie()" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
 </div>
-<!-- Modal -->
+<!-- New Modal -->
+
+<!-- Edit Modal -->
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" ng-submit="updateMovie()">
+    		<div ng-include="'partials/_form.html'"></div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteMovie(movie)">Delete</button>
+        <button type="button" class="btn btn-primary" ng-click="updateMovie()" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
 
 <div class="container">
     <div class="well well-sm">
@@ -68,7 +92,7 @@
                                 {{movie.year}}</p>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success" ui-sref="editMovie({id:movie.id})">Edit</a>
+                            <a class="btn btn-success" href="#" data-toggle="modal" data-target="#editModal" ng-click="editMovieCB(movie.id)">Edit</a>
                         </div>
                     </div>
                 </div>

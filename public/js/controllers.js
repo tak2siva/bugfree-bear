@@ -6,36 +6,55 @@ angular.module('movieApp.controllers',[]).controller('MovieListController',funct
 	$('#list').click(function(event){event.preventDefault();$('#products .item').addClass('list-group-item');});
 	$('#grid').click(function(event){event.preventDefault();$('#products .item').removeClass('list-group-item');$('#products .item').addClass('grid-group-item');});
 	
+	$scope.reload_movies = function(){
+		$state.transitionTo($state.current, $stateParams, {
+		    reload: true,
+		    inherit: false,
+		    notify: true
+		});
+	};
+	
+	$scope.closeModal = function(modal_name) {
+	  $("#"+modal_name).modal('hide');
+	  $('body').removeClass('modal-open');
+	  $('.modal-backdrop').remove();
+	};
+	
 	$scope.deleteMovie = function(movie){
 		//if(popupService.showPopup('Delete it ?')){
 			movie.$delete(function(){
 				console.log("deleted");		
 				//$window.location.href = '';
-			$state.transitionTo($state.current, $stateParams, {
-			    reload: true,
-			    inherit: false,
-			    notify: true
-			});
+			$scope.closeModal("editModal");		
+			$scope.reload_movies();
 				//$state.go('movies');
 			});
 		//}
 	};
 	
 	$scope.initMovie = function(){
-		$scope.new_movie = new Movie();
+		$scope.movie = new Movie();
 		console.log("initMovie");
-	}
+	};
 	
 	$scope.saveMovie = function(){
-		$scope.new_movie.$save(function(){
+		$scope.movie.$save(function(){
 			console.log("new movie added");
-			$state.transitionTo($state.current, $stateParams, {
-			    reload: true,
-			    inherit: false,
-			    notify: true
-			});
+			$scope.closeModal("myModal");
+			$scope.reload_movies();
 		});
-	}
+	};
+	
+	$scope.editMovieCB = function(id){
+		$scope.movie = Movie.get({id: id});
+	};
+	
+	$scope.updateMovie = function(){
+		$scope.movie.$update(function(){
+			//$state.go("movies");
+			$scope.reload_movies();			
+		});		
+	};
 	
 }).controller('MovieViewController', function($scope,$stateParams,Movie){
 	$scope.movie = Movie.get({id:$stateParams.id});
